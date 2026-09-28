@@ -1061,7 +1061,6 @@ video{
 
 </div>
 
-
 <!-- =====================================================
      MUSIK
 ===================================================== -->
@@ -1135,8 +1134,9 @@ id="pinPage">
 
         <br><br>
 
-        Masukkan kode rahasia
+        Masukkan tanggal kita jadian
         untuk membukanya ❤️
+        
 
     </div>
 
@@ -1326,18 +1326,13 @@ id="page2">
 
     <p>
 
-        Hari ini bukan cuma tentang
-        bertambahnya usia kamu.
+        selamat ulang tahun geaa sayanggg
+        Semoga di umur baru kamu ini kamu di beri petunjuk hidup yang baik
+        dan dapat di pertemukan dengan orang orang baik dan selalu suport kamuu
+
 
     </p>
 
-
-    <p>
-
-        Hari ini adalah tentang seseorang
-        yang begitu berarti buat aku.
-
-    </p>
 
 
     <button
@@ -1391,9 +1386,8 @@ id="page3">
 
     <p>
 
-        Jadi kali ini aku ingin
-        menyampaikannya lewat sesuatu
-        yang aku buat khusus untuk kamu.
+        ini ada beberapa clip video kita dulu
+        kamu masih iget kan...
 
     </p>
 
@@ -1592,7 +1586,7 @@ id="page5">
 
 */
 
-const PIN_RAHASIA = "0000";
+const PIN_RAHASIA = "2701";
 
 
 function checkPIN(){
@@ -1863,35 +1857,38 @@ video.addEventListener(
 );
 
 
-video.addEventListener(
-    "pause",
-    function(){
+video.addEventListener("play", function(){
+    // Saat video diputar, musik benar-benar berhenti
+    music.pause();
+    music.volume = 0;
+    musicButton.textContent = "🔇";
+});
 
-        if(!music.paused){
+video.addEventListener("pause", function(){
+    // Saat video dijeda, musik tetap mati
+    music.pause();
+    music.volume = 0;
+    musicButton.textContent = "🔇";
+});
 
-            music.volume =
-            0.35;
+video.addEventListener("ended", function(){
+    // Saat video selesai, musik hidup kembali
+    music.volume = 0;
+    music.play();
 
+    musicButton.textContent = "🔊";
+
+    let volume = 0;
+
+    const fadeBack = setInterval(function(){
+        if(volume < 0.35){
+            volume += 0.02;
+            music.volume = volume;
+        }else{
+            clearInterval(fadeBack);
         }
-
-    }
-);
-
-
-video.addEventListener(
-    "ended",
-    function(){
-
-        if(!music.paused){
-
-            music.volume =
-            0.35;
-
-        }
-
-    }
-);
-
+    }, 100);
+});
 
 </script>
 
